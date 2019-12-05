@@ -58,10 +58,10 @@ dev=> (test)
 ...
 ```
 
-But you can also run tests through Leiningen.
+But you can also run tests through a test runner.
 
 ```sh
-lein test
+./bin/test
 ```
 
 ## Legal
