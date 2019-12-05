@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+clojure -A:ion-dev '{:op :push :creds-profile "datomic" :region "ap-northeast-1"}'

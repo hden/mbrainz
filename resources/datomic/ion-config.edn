@@ -1,0 +1,5 @@
+{:app-name "falcon"
+ :lambdas
+ {:get-artist-by-gid
+  {:fn mbrainz.lambda.artist/get-artist-by-gid
+   :description "return artist by gid"}}}

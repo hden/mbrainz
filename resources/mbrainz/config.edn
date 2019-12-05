@@ -3,49 +3,61 @@
  :duct.profile/prod  {}
 
  :duct.module/logging {}
+ :duct.module.web/api {}
+
+ ;; Routes
+ :duct.module/ataraxy
+ {"/artist"
+  {["/" gid]
+   {:get [:artist/fetch ^uuid gid]}}}
 
  :duct.profile/base
-  {:duct.core/project-ns mbrainz
-   :duct.database/datomic {:server-type :cloud
-                           :region "ap-northeast-1"
-                           :system "falcon"
-                           :endpoint "http://entry.falcon.ap-northeast-1.datomic.net:8182"
-                           :proxy-port 8182
-                           :database "mbrainz-test"}
+ {:duct.core/project-ns mbrainz
+  :duct.server/http {} ;; Override jetty.
+  :duct.database/datomic {:server-type :ion
+                          :region "ap-northeast-1"
+                          :system "falcon"
+                          :endpoint "http://entry.falcon.ap-northeast-1.datomic.net:8182"
+                          :proxy-port 8182
+                          :database "mbrainz-test"}
 
-   :duct.migrator.ragtime/datomic
-   {:database #ig/ref :duct.database/datomic
-    :migrations [#ig/ref :mbrainz.migration/x01-schema
-                 #ig/ref :mbrainz.migration/x02-enums
-                 #ig/ref :mbrainz.migration/x03-countries
-                 #ig/ref :mbrainz.migration/x04-artists
-                 #ig/ref :mbrainz.migration/x05-areleases
-                 #ig/ref :mbrainz.migration/x06-areleases-artists
-                 #ig/ref :mbrainz.migration/x07-labels
-                 #ig/ref :mbrainz.migration/x08-scripts
-                 #ig/ref :mbrainz.migration/x09-langs
-                 #ig/ref :mbrainz.migration/x10-releases
-                 #ig/ref :mbrainz.migration/x11-releases-artists]}
+  ;; Handlers
+  :mbrainz.handler.artist/fetch {:db #ig/ref :duct.database/datomic}
 
-   [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x01-schema]
-   {:data #duct/resource "mbrainz/migrations/01-schema.edn"}
-   [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x02-enums]
-   {:data #duct/resource "mbrainz/migrations/02-enums.edn"}
-   [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x03-countries]
-   {:data #duct/resource "mbrainz/migrations/03-countries.edn"}
-   [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x04-artists]
-   {:data #duct/resource "mbrainz/migrations/04-artists.edn"}
-   [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x05-areleases]
-   {:data #duct/resource "mbrainz/migrations/05-areleases.edn"}
-   [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x06-areleases-artists]
-   {:data #duct/resource "mbrainz/migrations/06-areleases-artists.edn"}
-   [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x07-labels]
-   {:data #duct/resource "mbrainz/migrations/07-labels.edn"}
-   [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x08-scripts]
-   {:data #duct/resource "mbrainz/migrations/08-scripts.edn"}
-   [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x09-langs]
-   {:data #duct/resource "mbrainz/migrations/09-langs.edn"}
-   [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x10-releases]
-   {:data #duct/resource "mbrainz/migrations/10-releases.edn"}
-   [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x11-releases-artists]
-   {:data #duct/resource "mbrainz/migrations/11-releases-artists.edn"}}}
+  ;; Schema Migrations
+  :duct.migrator.ragtime/datomic
+  {:database #ig/ref :duct.database/datomic
+   :migrations [#ig/ref :mbrainz.migration/x01-schema
+                #ig/ref :mbrainz.migration/x02-enums
+                #ig/ref :mbrainz.migration/x03-countries
+                #ig/ref :mbrainz.migration/x04-artists
+                #ig/ref :mbrainz.migration/x05-areleases
+                #ig/ref :mbrainz.migration/x06-areleases-artists
+                #ig/ref :mbrainz.migration/x07-labels
+                #ig/ref :mbrainz.migration/x08-scripts
+                #ig/ref :mbrainz.migration/x09-langs
+                #ig/ref :mbrainz.migration/x10-releases
+                #ig/ref :mbrainz.migration/x11-releases-artists]}
+
+  [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x01-schema]
+  {:data #duct/resource "mbrainz/migrations/01-schema.edn"}
+  [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x02-enums]
+  {:data #duct/resource "mbrainz/migrations/02-enums.edn"}
+  [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x03-countries]
+  {:data #duct/resource "mbrainz/migrations/03-countries.edn"}
+  [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x04-artists]
+  {:data #duct/resource "mbrainz/migrations/04-artists.edn"}
+  [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x05-areleases]
+  {:data #duct/resource "mbrainz/migrations/05-areleases.edn"}
+  [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x06-areleases-artists]
+  {:data #duct/resource "mbrainz/migrations/06-areleases-artists.edn"}
+  [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x07-labels]
+  {:data #duct/resource "mbrainz/migrations/07-labels.edn"}
+  [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x08-scripts]
+  {:data #duct/resource "mbrainz/migrations/08-scripts.edn"}
+  [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x09-langs]
+  {:data #duct/resource "mbrainz/migrations/09-langs.edn"}
+  [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x10-releases]
+  {:data #duct/resource "mbrainz/migrations/10-releases.edn"}
+  [:duct.migrator.ragtime.datomic/edn :mbrainz.migration/x11-releases-artists]
+  {:data #duct/resource "mbrainz/migrations/11-releases-artists.edn"}}}

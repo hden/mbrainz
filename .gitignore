@@ -53,5 +53,7 @@ Temporary Items
 /dev/src/local.clj
 
 # REPL artifacts
+/.datomic-ions/
 .rebel_readline_history
 trace.edn
+/logs/
