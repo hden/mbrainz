@@ -9,7 +9,7 @@ FIXME: description
 When you first clone this repository, run:
 
 ```sh
-lein duct setup
+./bin/init
 ```
 
 This will create files for local configuration, and prep your system
@@ -20,7 +20,7 @@ for the project.
 To begin developing, start with a REPL.
 
 ```sh
-lein repl
+./bin/repl
 ```
 
 Then load the development environment.
@@ -34,7 +34,6 @@ Run `go` to prep and initiate the system.
 
 ```clojure
 dev=> (go)
-:duct.server.http.jetty/starting-server {:port 3000}
 :initiated
 ```
 
