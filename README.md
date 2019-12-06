@@ -1,6 +1,9 @@
 # mbrainz
 
-FIXME: description
+An experimental workflow (mostly duct) for Datomic Cloud.
+
+日本語の資料はこちらです。
+https://note.com/hden/n/n9850808a6c89
 
 ## Developing
 
