@@ -24,7 +24,7 @@
 
   ;; Launch an excellent readline REPL.
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.4"}
-                       cljfmt {:mvn/version "0.5.7"}
+                       cljfmt {:mvn/version "0.6.6"}
                        rewrite-clj {:mvn/version "0.5.2"}}
           :main-opts  ["-m" "rebel-readline.main"]}
 
