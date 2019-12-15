@@ -30,7 +30,7 @@
 
   ;; Test dependencies. Note that this does not invoke a runner.
   :test {:extra-paths ["test"]
-         :extra-deps {eftest {:mvn/version "0.5.7"}
+         :extra-deps {eftest {:mvn/version "0.5.9"}
                       kerodon {:mvn/version "0.9.1"}}}
 
   :runner {:extra-deps {com.cognitect/test-runner
