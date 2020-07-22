@@ -1,7 +1,7 @@
 {:paths ["resources" "src"]
 
  :deps {com.cognitect/anomalies {:mvn/version "0.1.12"}
-        com.datomic/client-cloud {:mvn/version "0.8.100"}
+        com.datomic/client-cloud {:mvn/version "0.8.102"}
         com.datomic/ion {:mvn/version "0.9.35"}
         duct/core {:mvn/version "0.8.0"}
         duct/module.ataraxy {:mvn/version "0.3.0"}
