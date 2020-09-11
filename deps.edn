@@ -16,7 +16,7 @@
  :aliases
  {;; Load the development environment.
   :dev {:extra-paths ["dev/resources" "dev/src"]
-        :extra-deps {integrant/repl {:mvn/version "0.3.1"}}}
+        :extra-deps {integrant/repl {:mvn/version "0.3.2"}}}
 
   ;; List dependencies that have new available versions.
   :outdated {:extra-deps {olical/depot {:mvn/version "2.0.1"}}
